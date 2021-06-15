@@ -1,19 +1,9 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[1]:
-
-
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 import requests
 from bs4 import BeautifulSoup
 import urllib.request
-
-
-# In[38]:
-
 
 #successfully scraped on 3/13/2021 -- csv file in git repositiory
 #parse top beer webpage
@@ -40,10 +30,6 @@ style = soup_a[122:]
 styles = style[::3]
 styles = styles[:100]
 
-
-# In[43]:
-
-
 #get bold txt for ratings and reviews
 for rating in soup.find_all('b'):
     soup_b.append(rating.text.strip())
@@ -66,16 +52,8 @@ df['Number of Reviews'] = reviews
 df['Style'] = styles
 df.head()
 
-
-# In[44]:
-
-
 #export dataframe to csv
 df.to_csv(r'C:\Users\keith\Downloads\BeerAdvocate_Top100.csv', index = True) 
-
-
-# In[ ]:
-
 
 #visualize some of the data
 sns.set_style('darkgrid')
@@ -84,4 +62,3 @@ sns.histplot(df['Rating'], bins=10, color="red", kde=True)
 plt.xticks(fontsize=9, rotation=90)
 plt.title('BeerAdvocate Top 100 Ratings Range')
 plt.show()
-
